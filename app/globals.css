@@ -1,26 +1,337 @@
-@import "tailwindcss";
+/* src/app/globals.css */
 
+/* 1. RESET & VARIABLES */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --color-primary: #0022FF;
+    --color-white: #FFFFFF;
+    --color-black: #111111;
+    --color-grey-light: #F4F4F4;
+    --color-hover-bg: #111111;
+    --color-hover-text: #FFFFFF;
+    
+    --font-display: 'Anton', sans-serif;
+    --font-body: 'Space Mono', monospace;
+    --font-hand: 'Permanent Marker', cursive;
+    
+    --text-xl: clamp(3rem, 12vw, 9rem);
+    --text-lg: clamp(2rem, 5vw, 4rem);
+    
+    --border-width: 3px;
+    --shadow-hard: 6px 6px 0px var(--color-black);
+    --shadow-hover: 10px 10px 0px var(--color-white);
+    --container-width: 1200px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { -webkit-font-smoothing: antialiased; line-height: 1.5; }
+img, picture, video, canvas, svg { display: block; max-width: 100%; }
+input, button, textarea, select { font: inherit; }
+a { text-decoration: none; color: inherit; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* 2. MAIN STYLES */
+@keyframes move-lines {
+    0% { background-position: 0 0; }
+    100% { background-position: 200px 200px; }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font-body);
+    background-color: var(--color-primary);
+    color: var(--color-black);
+    overflow-x: hidden;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M0 50 Q 25 30, 50 50 T 100 50 M0 80 Q 25 60, 50 80 T 100 80 M0 20 Q 25 0, 50 20 T 100 20' fill='none' stroke='rgba(255,255,255,0.15)' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    animation: move-lines 25s linear infinite;
+}
+
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* BUTTONS */
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--color-white);
+    color: var(--color-black);
+    border: var(--border-width) solid var(--color-black);
+    padding: 1rem 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-shadow: var(--shadow-hard);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.8);
+    background-color: var(--color-hover-bg);
+    color: var(--color-hover-text);
+    border-color: var(--color-white);
+}
+
+.btn-full { width: 100%; }
+
+/* HEADER */
+.main-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: var(--border-width) solid var(--color-black);
+    z-index: 1000;
+    padding: 0.8rem 0;
+    transition: transform 0.3s ease;
+}
+
+.main-header.hide { transform: translateY(-100%); }
+
+.nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-img { height: 50px; width: auto; display: block; }
+
+/* HERO */
+.hero {
+    min-height: 90vh;
+    padding-top: 140px;
+    padding-bottom: 60px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.hero-pre-title {
+    color: white; 
+    font-family: var(--font-hand); 
+    font-size: 1.5rem; 
+    transform: rotate(-3deg);
+    margin-bottom: 30px; 
+    display: inline-block;
+}
+
+.hero-title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    color: var(--color-white);
+    line-height: 0.9;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+}
+
+/* MARQUEE */
+.marquee-container {
+    background: var(--color-black);
+    color: var(--color-white);
+    padding: 15px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    border-top: 3px solid white;
+    border-bottom: 3px solid white;
+    transform: rotate(-2deg) scale(1.05);
+    margin: 40px 0;
+}
+
+.marquee-content {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* SEKCJE */
+.section-paper {
+    background-color: var(--color-grey-light);
+    color: var(--color-black);
+    padding: 5rem 0;
+    background-image: linear-gradient(#ccc 1px, transparent 1px), linear-gradient(90deg, #ccc 1px, transparent 1px);
+    background-size: 40px 40px;
+    border-top: var(--border-width) solid var(--color-black);
+    border-bottom: var(--border-width) solid var(--color-black);
+    position: relative;
+    z-index: 10;
+}
+
+.info-card {
+    background: white;
+    border: 3px solid black;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translate(-5px, -5px) rotate(1deg) !important;
+    box-shadow: 15px 15px 0px rgba(0,255,0, 0.5);
+}
+
+.grid-2 { display: grid; grid-template-columns: 1fr; gap: 3rem; }
+@media(min-width: 768px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+
+/* ANIMACJE */
+.reveal-up {
+    opacity: 0;
+    transform: translateY(100px) scale(0.95);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
+
+.reveal-up.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+
+/* --------------------------------------------------------- */
+/* BRAKUJĄCE STYLE DLA SOCIAL HUB - NAPRAWIONE */
+/* --------------------------------------------------------- */
+
+.social-page-wrapper {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* Tło niebieskie z falami, takie jak body */
+    background-color: var(--color-primary); 
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M0 50 Q 25 30, 50 50 T 100 50 M0 80 Q 25 60, 50 80 T 100 80 M0 20 Q 25 0, 50 20 T 100 20' fill='none' stroke='rgba(255,255,255,0.15)' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    animation: move-lines 25s linear infinite;
+    
+    z-index: 2000;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.social-card {
+    background: white;
+    padding: 40px 60px;
+    border: 4px solid black; /* JEST OBRAMOWANIE */
+    box-shadow: 20px 20px 0 black;
+    transform: rotate(-1deg);
+    margin: 0 auto;
+    
+    /* RESPONSYWNOŚĆ */
+    width: 90%; 
+    max-width: 900px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Ekrany powyżej 768px (Tablet/Komputer) */
+@media (min-width: 768px) {
+    .social-card {
+        padding: 60px 160px;
+    }
+}
+
+.link-hub {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center; 
+    width: 100%;
+    margin-top: 30px;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--color-white);
+    color: var(--color-black);
+    border: 3px solid var(--color-black);
+    padding: 1.2rem 1.5rem;
+    font-weight: 700;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 8px 8px 0px var(--color-black);
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+    cursor: pointer;
+    width: 100%; 
+}
+
+.social-btn:hover { transform: translate(-4px, -4px); box-shadow: 12px 12px 0px rgba(0,0,0,1); border-color: black; color: white; }
+.social-btn.insta:hover { background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); border-color: white; }
+.social-btn.tiktok:hover { background: #000000; color: #00f2ea; box-shadow: 12px 12px 0px #ff0050; border-color: #00f2ea; }
+.social-btn.fb:hover { background: #1877F2; border-color: white; }
+.social-btn svg { width: 28px; height: 28px; fill: currentColor; }
+
+.close-btn {
+    font-size: 3rem;
+    line-height: 0.5;
+    color: var(--color-black);
+    cursor: pointer;
+    text-decoration: none;
+}
+.close-btn:hover { transform: rotate(90deg) scale(1.1); color: var(--color-white); } /* Biały na niebieskim tle */
+
+/* --- src/app/globals.css (DOKLEJ NA KOŃCU) --- */
+
+/* 1. UKRYWANIE PASKA PRZEWIJANIA (Ale scroll działa) */
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+html {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+}
+
+/* 2. ARCHITEKTONICZNY KURSOR (Krzyżyk) */
+body, a, button, .btn {
+    cursor: crosshair !important; /* Styl AutoCAD / Rysunek techniczny */
+}
+
+/* Opcjonalnie: Zmiana kursora na łapkę tylko przy linkach, jeśli wolisz */
+/* a:hover, button:hover, .btn:hover { cursor: pointer !important; } */
+
+/* --- src/app/globals.css (DODAJ NA SAMYM DOLE) --- */
+
+.animated-bg {
+    /* Tło i Animacja */
+    background-color: var(--color-primary); 
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M0 50 Q 25 30, 50 50 T 100 50 M0 80 Q 25 60, 50 80 T 100 80 M0 20 Q 25 0, 50 20 T 100 20' fill='none' stroke='rgba(255,255,255,0.15)' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    animation: move-lines 25s linear infinite;
+    
+    /* Ustawienia layoutu */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+/* Responsywna siatka dla strony kontaktowej */
+.grid-responsive {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+}
+
+@media (max-width: 900px) {
+    .grid-responsive {
+        grid-template-columns: 1fr !important; /* Na telefonie jedna kolumna */
+        gap: 40px;
+    }
 }
