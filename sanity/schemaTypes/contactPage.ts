@@ -8,28 +8,54 @@ export const contactPage = defineType({
   fields: [
     defineField({
       name: 'title',
-      title: 'Nagłówek (np. Zgłoś projekt)',
+      title: 'Nagłówek strony',
       type: 'string',
-      initialValue: 'Współpraca &<br>Zgłoszenia',
+      initialValue: 'KONTAKT',
     }),
-    defineField({
-      name: 'description',
-      title: 'Opis po lewej stronie',
-      type: 'text',
-      rows: 4,
-      initialValue: 'Masz pomysł na warsztaty? Chcesz dołączyć do koła?',
-    }),
+    
+    // --- DANE KONTAKTOWE ---
     defineField({
       name: 'email',
-      title: 'Adres e-mail (widoczny w wizytówce)',
+      title: 'Adres e-mail',
       type: 'string',
-      initialValue: 'rokoko@polsl.pl',
+      initialValue: 'rokoko.kolonaukowe@gmail.com',
     }),
     defineField({
-      name: 'address',
-      title: 'Adres / Lokalizacja',
+      name: 'instagram',
+      title: 'Link do Instagrama',
+      type: 'url',
+      initialValue: 'https://www.instagram.com/skn_rokoko/',
+    }),
+    defineField({
+      name: 'facebook',
+      title: 'Link do Facebooka',
+      type: 'url',
+      initialValue: 'https://www.facebook.com/SKNRokoko',
+    }),
+
+    // --- WSPÓŁPRACA ---
+    defineField({
+      name: 'collaborationTitle',
+      title: 'Tytuł sekcji Współpraca',
       type: 'string',
-      initialValue: 'Wydział Architektury PŚ, Gliwice',
+      initialValue: 'WSPÓŁPRACA',
+    }),
+    defineField({
+      name: 'collaborationContent',
+      title: 'Treść sekcji Współpraca',
+      type: 'array',
+      of: [{ type: 'block' }],
+      initialValue: [
+        {
+          _type: 'block',
+          children: [
+            {
+              _type: 'span',
+              text: 'Chcesz dołączyć do koła? A może podjąć współprace nad warsztatami bądź wykładami? Albo po prostu jesteś ciekaw naszej działalności? Napisz do nas a my z przyjemnością się odezwiemy.',
+            },
+          ],
+        },
+      ],
     }),
   ],
 })

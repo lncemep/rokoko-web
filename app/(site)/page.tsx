@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image"; // Potrzebne do generowania linku Logo
+import Footer from "@/components/Footer";
 
 async function getHomeData() {
   const data = await client.fetch(`*[_type == "homePage"][0]`, {}, { next: { revalidate: 0 } });
@@ -33,6 +34,8 @@ export default async function Home() {
     pillarsTitle, 
     pillarsList,
     headerBlogBtn,
+    headerGalleryBtn,
+    headerLibraryBtn,
     headerContactBtn,
     headerSocialBtn,
     footerQuote,
@@ -59,8 +62,17 @@ export default async function Home() {
           </Link>
           
           <nav style={{ display: 'flex', gap: '25px', alignItems: 'center' }}>
+            <Link href="/o-nas" style={{ fontWeight: 'bold', textDecoration: 'underline', textUnderlineOffset: '4px' }}>
+                O Nas
+            </Link>
             <Link href="/blog" style={{ fontWeight: 'bold', textDecoration: 'underline', textUnderlineOffset: '4px' }}>
                 {headerBlogBtn || 'Blog'}
+            </Link>
+            <Link href="/gallery" style={{ fontWeight: 'bold', textDecoration: 'underline', textUnderlineOffset: '4px' }}>
+                {headerGalleryBtn || 'Galeria'}
+            </Link>
+            <Link href="/library" style={{ fontWeight: 'bold', textDecoration: 'underline', textUnderlineOffset: '4px' }}>
+                {headerLibraryBtn || 'Biblioteka'}
             </Link>
             <Link href="/contact" style={{ fontWeight: 'bold', textDecoration: 'underline', textUnderlineOffset: '4px' }}>
                 {headerContactBtn || 'Współpraca'}
@@ -143,16 +155,7 @@ export default async function Home() {
         </section>
       </main>
 
-      <footer style={{ background: 'black', color: 'white', padding: '40px 0', textAlign: 'center' }}>
-        <div className="container reveal-up">
-           <p style={{ fontFamily: 'var(--font-hand)', color: 'var(--color-primary)', fontSize: '1.2rem' }}>
-                {footerQuote || '„Kultura to umiejętność dziedziczenia”'}
-           </p>
-           <p style={{ marginTop: '20px', fontSize: '0.8rem', opacity: 0.6 }}>
-                &copy; {new Date().getFullYear()} {footerCopyright || 'SKN ROKOKO'}
-           </p>
-        </div>
-      </footer>
+      <Footer quote={footerQuote} copyright={footerCopyright} />
     </>
   );
 }

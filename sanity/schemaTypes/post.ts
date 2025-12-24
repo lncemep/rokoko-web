@@ -65,13 +65,11 @@ export const post = defineType({
               name: 'caption',
               type: 'string',
               title: 'Podpis pod zdjęciem',
-              options: { isHighlighted: true }
             },
             {
               name: 'alt',
               type: 'string',
               title: 'Tekst alternatywny',
-              options: { isHighlighted: true }
             }
           ]
         }

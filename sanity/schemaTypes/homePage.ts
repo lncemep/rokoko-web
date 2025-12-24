@@ -25,13 +25,13 @@ export const homePage = defineType({
       name: 'heroPreTitle',
       title: 'Mały napis (nad tytułem)',
       type: 'string',
-      initialValue: 'Architektura to proces →',
+      initialValue: 'PRZESZŁOŚĆ JEST FUNDAMENTEM DLA PRZYSZŁOŚCI',
     }),
     defineField({
       name: 'heroTitle',
       title: 'Główny Tytuł (HTML dozwolony)',
       type: 'string',
-      initialValue: 'Dziedzictwo<br>to Przyszłość',
+      initialValue: 'SKN ROKOKO',
     }),
     defineField({
       name: 'heroButtonText',
@@ -45,7 +45,7 @@ export const homePage = defineType({
       name: 'marqueeText',
       title: 'Pasek Przewijany (Marquee)',
       type: 'text',
-      initialValue: 'WARSZTATY • BADANIA TERENOWE • INWENTARYZACJE •',
+      initialValue: 'WARSZTATY • BADANIA TERENOWE • INWENTARYZACJE • WYKŁADY • WYCIECZKI •',
     }),
 
     // --- 3. SEKCJA O NAS ---
@@ -53,12 +53,13 @@ export const homePage = defineType({
         name: 'aboutTitle',
         title: 'Tytuł sekcji O Nas',
         type: 'string',
-        initialValue: 'SKN ROKOKO',
+        initialValue: 'O NAS',
     }),
     defineField({
         name: 'aboutDescription',
         title: 'Opis krótki O Nas',
         type: 'text',
+        initialValue: 'Jesteśmy studenckim kołem naukowym działającym od 2016 przy wydziale architektury politechniki śląskiej. Zajmujemy się badaniem, zgłębianiem i zwiedzaniem szeroko pojętej historii architektury. Poprzez badania terenowe, warsztaty, wyjazdy edukacyjne, wykłady oraz analizowanie historycznych dokumentów i rysunków.'
     }),
     defineField({
         name: 'aboutButtonText',
@@ -72,7 +73,7 @@ export const homePage = defineType({
         name: 'pillarsTitle',
         title: 'Tytuł czarnej karty (np. NASZE FILARY)',
         type: 'string',
-        initialValue: 'NASZE FILARY:',
+        initialValue: 'DZIAŁALNOŚĆ:',
     }),
     defineField({
         name: 'pillarsList',
@@ -80,10 +81,10 @@ export const homePage = defineType({
         type: 'array',
         of: [{ type: 'string' }],
         initialValue: [
-            '> Warsztaty konserwatorskie',
-            '> Inwentaryzacja 3D',
-            '> Eksploracje',
-            '> Wycieczki naukowe'
+            '> Wyjazdy edukacyjno-badawcze',
+            '> Wykłady naukowe',
+            '> Warsztaty',
+            '> Inwentaryzacje'
         ]
     }),
 
@@ -93,6 +94,18 @@ export const homePage = defineType({
         title: 'Przycisk 1: BLOG',
         type: 'string',
         initialValue: 'Blog'
+    }),
+    defineField({
+        name: 'headerGalleryBtn',
+        title: 'Przycisk: GALERIA',
+        type: 'string',
+        initialValue: 'Galeria'
+    }),
+    defineField({
+        name: 'headerLibraryBtn',
+        title: 'Przycisk: BIBLIOTEKA',
+        type: 'string',
+        initialValue: 'Biblioteka'
     }),
     defineField({
         name: 'headerContactBtn',

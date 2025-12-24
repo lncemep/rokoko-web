@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
+import Footer from "@/components/Footer";
 
 // Zapytanie do bazy - dodajemy 'excerpt'
 async function getPosts() {
@@ -42,7 +43,7 @@ export default async function BlogPage() {
 
             {/* LISTA POSTÓW */}
             <div className="container">
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '40px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '40px' }}>
                     
                     {posts.length > 0 ? (
                         posts.map((post: any) => (
@@ -90,6 +91,8 @@ export default async function BlogPage() {
             </div>
 
         </main>
+        
+        <Footer />
     </div>
   );
 }
