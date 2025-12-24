@@ -1,9 +1,10 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { client } from "@/sanity/lib/client";
 import GalleryGrid from "@/components/GalleryGrid";
 
 async function getGalleryData() {
-  const data = await client.fetch(`*[_type == "galleryPage"][0]`, {}, { next: { revalidate: 0 } });
+  const data = await client.fetch(`*[_type == "galleryPage"][0]`, {}, { next: { revalidate: 60 } });
   return data;
 }
 
@@ -19,8 +20,7 @@ export default async function GalleryPage() {
         <header className="main-header">
             <div className="container nav-wrapper">
                 <Link href="/">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/assets/img/logo.png" className="logo-img" alt="Logo" />
+                    <Image src="/assets/img/logo.png" className="logo-img" alt="Logo" width={150} height={50} style={{ width: 'auto', height: '50px' }} />
                 </Link>
                 <Link href="/" className="btn" style={{color: 'black', background: 'white'}}>&larr; Wróć</Link>
                 {/* SECRET ADMIN BUTTON */}

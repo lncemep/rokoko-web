@@ -1,10 +1,11 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { client } from "@/sanity/lib/client";
 import ContactForm from "@/components/ContactForm";
 import { PortableText } from '@portabletext/react';
 
 async function getContactData() {
-  const data = await client.fetch(`*[_type == "contactPage"][0]`, {}, { next: { revalidate: 0 } });
+  const data = await client.fetch(`*[_type == "contactPage"][0]`, {}, { next: { revalidate: 60 } });
   return data;
 }
 
@@ -17,13 +18,12 @@ export default async function ContactPage() {
   const facebook = data?.facebook;
 
   return (
-    <div className="animated-bg">
+    <div className="animated-bg" style={{ overflowX: 'hidden' }}>
         
         <header className="main-header">
             <div className="container nav-wrapper">
                 <Link href="/">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/assets/img/logo.png" className="logo-img" alt="Logo" />
+                    <Image src="/assets/img/logo.png" className="logo-img" alt="Logo" width={150} height={50} style={{ width: 'auto', height: '50px' }} />
                 </Link>
                 <Link href="/" className="btn" style={{color: 'black', background: 'white'}}>&larr; Wróć</Link>
                 {/* SECRET ADMIN BUTTON */}
@@ -37,12 +37,12 @@ export default async function ContactPage() {
             
             <div className="container">
                 
-                <div className="grid-responsive" style={{ alignItems: 'start', gap: '60px' }}>
+                <div className="grid-responsive">
                     
                     {/* LEWA KOLUMNA - INFO */}
                     <div className="reveal-up">
                         <h1 
-                            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(3rem, 6vw, 5rem)', lineHeight: 1, textTransform: 'uppercase', color: 'white', marginBottom: '30px' }}
+                            className="contact-title"
                         >
                             {title}
                         </h1>

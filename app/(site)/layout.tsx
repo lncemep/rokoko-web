@@ -1,12 +1,13 @@
 import '../globals.css';
 import MotionEngine from '@/components/MotionEngine';
+import HeaderScrollLogic from '@/components/HeaderScrollLogic';
 import type { Metadata, Viewport } from 'next';
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 
 // Funkcja pobierająca dane do Metadata (Favicon, Tytuł)
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await client.fetch(`*[_type == "homePage"][0]`, {}, { next: { revalidate: 0 } });
+  const data = await client.fetch(`*[_type == "homePage"][0]`, {}, { next: { revalidate: 60 } });
 
   // Jeśli mamy favicon w CMS, używamy go. Jeśli nie, nic nie ustawiamy (domyślny next.svg)
   // WAŻNE: urlFor może zwrócić null, jeśli obrazek nie jest wgrany.
@@ -148,6 +149,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body suppressHydrationWarning={true}>
         <MotionEngine />
+        <HeaderScrollLogic />
         {children}
       </body>
     </html>

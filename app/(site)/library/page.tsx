@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 
@@ -16,7 +17,7 @@ async function getLibraryData() {
         }
       }
     }
-  }`, {}, { next: { revalidate: 0 } });
+  }`, {}, { next: { revalidate: 60 } });
   return data;
 }
 
@@ -32,8 +33,7 @@ export default async function LibraryPage() {
         <header className="main-header">
             <div className="container nav-wrapper">
                 <Link href="/">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/assets/img/logo.png" className="logo-img" alt="Logo" />
+                    <Image src="/assets/img/logo.png" className="logo-img" alt="Logo" width={150} height={50} style={{ width: 'auto', height: '50px' }} />
                 </Link>
                 <Link href="/" className="btn" style={{color: 'black', background: 'white'}}>&larr; Wróć</Link>
                 {/* SECRET ADMIN BUTTON */}
@@ -72,12 +72,13 @@ export default async function LibraryPage() {
                             {section.items?.map((item: any, itemIndex: number) => (
                                 <div key={itemIndex} className="info-card" style={{ background: 'white', color: 'black', padding: '20px', display: 'flex', flexDirection: 'column' }}>
                                     {item.image && (
-                                        <div style={{ marginBottom: '15px', border: '1px solid #ddd', height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', background: '#f5f5f5' }}>
-                                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                                            <img 
+                                        <div style={{ marginBottom: '15px', border: '1px solid #ddd', height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', background: '#f5f5f5', position: 'relative' }}>
+                                            <Image 
                                                 src={urlFor(item.image).width(400).url()} 
                                                 alt={item.title}
-                                                style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
+                                                fill
+                                                style={{ objectFit: 'contain' }}
+                                                sizes="(max-width: 768px) 100vw, 33vw"
                                             />
                                         </div>
                                     )}

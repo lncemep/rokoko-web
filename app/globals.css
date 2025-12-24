@@ -101,10 +101,14 @@ body {
 
 /* RESPONSIVE HEADER */
 @media (max-width: 768px) {
+    .main-header {
+        padding: 5px 0; /* Mniejszy padding */
+    }
+
     .nav-wrapper {
         flex-direction: column;
-        gap: 10px;
-        padding-bottom: 10px;
+        gap: 5px; /* Mniejszy odstęp */
+        padding-bottom: 5px;
         justify-content: center; /* Wyśrodkowanie */
     }
     
@@ -249,6 +253,10 @@ body {
     transform: translateY(100px) scale(0.95);
     transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, opacity;
+    width: 100%; /* Zapewnia, że element nie jest szerszy niż kontener */
+    max-width: 100%;
+    min-width: 0; /* CRITICAL: Zapobiega rozpychaniu w Gridzie */
+    box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
@@ -401,6 +409,26 @@ body, a, button, .btn {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
+    align-items: start;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* FIX: Zapobiega "rozpychaniu" siatki przez dzieci (Grid Blowout) */
+.grid-responsive > * {
+    min-width: 0;
+    width: 100%;
+}
+
+.contact-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 5rem); /* Zmniejszone minimum */
+    line-height: 1;
+    text-transform: uppercase;
+    color: white;
+    margin-bottom: 30px;
+    word-break: break-word; /* Zapobiega wychodzeniu długich słów */
+    overflow-wrap: anywhere; /* Mocniejsze łamanie słów */
 }
 
 @media (max-width: 900px) {
@@ -417,15 +445,17 @@ body, a, button, .btn {
     border: 3px solid black;
     box-shadow: 10px 10px 0px rgba(0,0,0,0.5);
     color: black;
-    width: 100%;
+    width: 100%; /* Wracamy do 100% ale z box-sizing */
     max-width: 100%;
-    box-sizing: border-box; /* Ensure padding doesn't add to width */
+    box-sizing: border-box;
+    overflow-wrap: anywhere; /* Mocniejsze łamanie */
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .contact-form-card {
-        padding: 20px; /* Mniejszy padding na telefonie */
-        box-shadow: 6px 6px 0px rgba(0,0,0,0.5); /* Mniejszy cień */
+        padding: 20px;
+        box-shadow: 6px 6px 0px rgba(0,0,0,0.5);
+        width: 100%; 
     }
 }
 
@@ -436,12 +466,18 @@ body, a, button, .btn {
     padding: 30px;
     border: 3px solid black;
     box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .contact-info-card {
-        transform: none; /* Wyłącz rotację na telefonie, żeby nie wychodziło poza ekran */
+        transform: none; /* Wyłącz rotację na mniejszych ekranach */
         padding: 20px;
         margin-bottom: 20px;
+        box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+        width: 100%;
     }
 }

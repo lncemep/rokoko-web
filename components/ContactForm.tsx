@@ -45,7 +45,7 @@ export default function ContactForm() {
                 name="name" // To pole zobaczy Formspree
                 placeholder="Wpisz dane..." 
                 required
-                style={{ width: '100%', padding: '15px', border: '2px solid black', background: 'white', fontFamily: 'inherit', fontSize: '1rem' }} 
+                style={{ width: '100%', padding: '15px', border: '2px solid black', background: 'white', fontFamily: 'inherit', fontSize: '1rem', boxSizing: 'border-box' }} 
             />
             <ValidationError prefix="Name" field="name" errors={state.errors} />
         </div>
@@ -61,7 +61,7 @@ export default function ContactForm() {
                 name="email" 
                 placeholder="adres@email.com" 
                 required
-                style={{ width: '100%', padding: '15px', border: '2px solid black', background: 'white', fontFamily: 'inherit', fontSize: '1rem' }} 
+                style={{ width: '100%', padding: '15px', border: '2px solid black', background: 'white', fontFamily: 'inherit', fontSize: '1rem', boxSizing: 'border-box' }} 
             />
             <ValidationError prefix="Email" field="email" errors={state.errors} />
         </div>
@@ -74,7 +74,7 @@ export default function ContactForm() {
             <select 
                 id="subject"
                 name="subject" 
-                style={{ width: '100%', padding: '15px', border: '2px solid black', background: 'white', fontFamily: 'inherit', fontSize: '1rem', appearance: 'none' }}
+                style={{ width: '100%', padding: '15px', border: '2px solid black', background: 'white', fontFamily: 'inherit', fontSize: '1rem', appearance: 'none', boxSizing: 'border-box' }}
             >
                 <option value="Dolaczenie">Chcę dołączyć do koła</option>
                 <option value="Wspolpraca">Propozycja współpracy</option>
@@ -94,7 +94,7 @@ export default function ContactForm() {
                 rows={5} 
                 placeholder="Opisz swoją sprawę..." 
                 required
-                style={{ width: '100%', padding: '15px', border: '2px solid black', background: 'white', fontFamily: 'inherit', fontSize: '1rem', resize: 'vertical' }}
+                style={{ width: '100%', padding: '15px', border: '2px solid black', background: 'white', fontFamily: 'inherit', fontSize: '1rem', resize: 'vertical', boxSizing: 'border-box' }}
             ></textarea>
             <ValidationError prefix="Message" field="message" errors={state.errors} />
         </div>

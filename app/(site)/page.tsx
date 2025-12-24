@@ -1,10 +1,11 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image"; // Potrzebne do generowania linku Logo
 import Footer from "@/components/Footer";
 
 async function getHomeData() {
-  const data = await client.fetch(`*[_type == "homePage"][0]`, {}, { next: { revalidate: 0 } });
+  const data = await client.fetch(`*[_type == "homePage"][0]`, {}, { next: { revalidate: 60 } });
   return data;
 }
 
@@ -49,11 +50,14 @@ export default async function Home() {
           <Link href="/">
              {/* LOGO DYNAMICZNE Z SANITY */}
              {siteLogo ? (
-                 // eslint-disable-next-line @next/next/no-img-element
-                 <img 
+                 <Image 
                     src={urlFor(siteLogo).url()} 
                     alt="ROKOKO Logo" 
-                    className="logo-img" 
+                    className="logo-img"
+                    width={150}
+                    height={50}
+                    priority
+                    style={{ width: 'auto', height: '50px' }}
                  />
              ) : (
                  // Fallback, jeśli nie wgrałeś logo w panelu

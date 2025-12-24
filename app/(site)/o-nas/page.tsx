@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { PortableText } from '@portabletext/react';
@@ -19,8 +20,7 @@ export default async function AboutPage() {
         <header className="main-header">
             <div className="container nav-wrapper">
                 <Link href="/">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/assets/img/logo.png" alt="ROKOKO Logo" className="logo-img" />
+                    <Image src="/assets/img/logo.png" alt="ROKOKO Logo" className="logo-img" width={150} height={50} style={{ width: 'auto', height: '50px' }} />
                 </Link>
                 <Link href="/" className="btn" style={{ padding: '0.5rem 1rem' }}>&larr; Wróć</Link>
                 {/* SECRET ADMIN BUTTON */}
@@ -68,12 +68,13 @@ export default async function AboutPage() {
                                     flexDirection: 'column'
                                 }}>
                                     {item.image && (
-                                        <div style={{ marginBottom: '20px', border: '1px solid #ddd', overflow: 'hidden', aspectRatio: '4/3' }}>
-                                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                                            <img 
+                                        <div style={{ marginBottom: '20px', border: '1px solid #ddd', overflow: 'hidden', aspectRatio: '4/3', position: 'relative' }}>
+                                            <Image 
                                                 src={urlFor(item.image).width(600).url()} 
                                                 alt={item.title}
-                                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                fill
+                                                style={{ objectFit: 'cover' }}
+                                                sizes="(max-width: 768px) 100vw, 50vw"
                                             />
                                         </div>
                                     )}

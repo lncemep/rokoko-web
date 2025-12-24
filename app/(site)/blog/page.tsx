@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import Footer from "@/components/Footer";
@@ -12,7 +13,7 @@ async function getPosts() {
     mainImage,
     excerpt // <-- Pobieramy zajawkę
   }`;
-  const posts = await client.fetch(query, {}, { next: { revalidate: 0 } });
+  const posts = await client.fetch(query, {}, { next: { revalidate: 60 } });
   return posts;
 }
 
@@ -27,7 +28,7 @@ export default async function BlogPage() {
         <header className="main-header">
             <div className="container nav-wrapper">
                 <Link href="/">
-                    <img src="/assets/img/logo.png" className="logo-img" alt="Logo" />
+                    <Image src="/assets/img/logo.png" className="logo-img" alt="Logo" width={150} height={50} style={{ width: 'auto', height: '50px' }} />
                 </Link>
                 <Link href="/" className="btn" style={{color: 'black', background: 'white'}}>&larr; Wróć</Link>
             </div>
@@ -53,12 +54,13 @@ export default async function BlogPage() {
                                     
                                     {/* ZDJĘCIE */}
                                     {post.mainImage && (
-                                        <div style={{ width: '100%', height: '200px', backgroundColor: '#ddd', marginBottom: '20px', overflow: 'hidden', border: '2px solid black' }}>
-                                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                                            <img 
+                                        <div style={{ width: '100%', height: '200px', backgroundColor: '#ddd', marginBottom: '20px', overflow: 'hidden', border: '2px solid black', position: 'relative' }}>
+                                            <Image 
                                                 src={urlFor(post.mainImage).width(400).height(250).url()} 
                                                 alt={post.title} 
-                                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                fill
+                                                style={{ objectFit: 'cover' }}
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                             />
                                         </div>
                                     )}

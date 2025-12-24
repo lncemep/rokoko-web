@@ -4,7 +4,7 @@ import { client } from "@/sanity/lib/client";
 // 1. Funkcja pobierająca dane z Sanity
 // Ustawiamy revalidate: 0, aby widzieć zmiany natychmiast po edycji w panelu
 async function getSocialData() {
-  const data = await client.fetch(`*[_type == "socialPage"][0]`, {}, { next: { revalidate: 0 } });
+  const data = await client.fetch(`*[_type == "socialPage"][0]`, {}, { next: { revalidate: 60 } });
   return data;
 }
 

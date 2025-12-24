@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { PortableText, PortableTextComponents } from '@portabletext/react';
@@ -50,10 +51,11 @@ const components: PortableTextComponents = {
       return (
         <figure style={{ margin: '40px 0', textAlign: 'center' }}>
           <div style={{ position: 'relative', display: 'inline-block', maxWidth: '100%' }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={urlFor(value).width(1200).auto('format').url()}
               alt={value.alt || 'Zdjęcie w treści'}
+              width={1200}
+              height={800} // Przybliżona wysokość, style to nadpiszą
               style={{ 
                   maxWidth: '100%', 
                   height: 'auto', 
@@ -103,7 +105,9 @@ export default async function BlogPostPage(props: Props) {
     <div style={{ backgroundColor: 'white', minHeight: '100vh' }}>
         <header className="main-header">
             <div className="container nav-wrapper">
-                <Link href="/"><img src="/assets/img/logo.png" className="logo-img" alt="Logo" /></Link>
+                <Link href="/">
+                    <Image src="/assets/img/logo.png" className="logo-img" alt="Logo" width={150} height={50} style={{ width: 'auto', height: '50px' }} />
+                </Link>
                 <Link href="/blog" className="btn">&larr; Wróć do bloga</Link>
             </div>
         </header>
@@ -119,11 +123,13 @@ export default async function BlogPostPage(props: Props) {
 
             {post.mainImage && (
                 <div style={{ marginBottom: '40px', border: '3px solid black' }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img 
+                    <Image 
                         src={urlFor(post.mainImage).width(800).url()} 
                         alt={post.title} 
+                        width={800}
+                        height={500}
                         style={{ width: '100%', height: 'auto', display: 'block' }}
+                        priority
                     />
                 </div>
             )}
