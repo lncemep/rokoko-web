@@ -32,7 +32,7 @@ export default async function AboutPage() {
 
         <main style={{ paddingTop: '140px', paddingBottom: '80px', flex: 1 }}>
             
-            <div className="container reveal-up" style={{ marginBottom: '60px' }}>
+            <div className="container reveal-up" style={{ marginBottom: '60px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <p style={{ fontFamily: 'var(--font-hand)', color: 'var(--color-primary)', fontSize: '1.5rem' }}>
                     {data?.slogan || 'PRZESZŁOŚĆ JEST FUNDAMENTEM DLA PRZYSZŁOŚCI'}
                 </p>
@@ -44,7 +44,7 @@ export default async function AboutPage() {
                 
                 {/* INTRO TEXT */}
                 {data?.introContent && (
-                    <div style={{ marginTop: '30px', fontSize: '1.2rem', lineHeight: 1.6, maxWidth: '800px' }}>
+                    <div style={{ marginTop: '30px', fontSize: '1.2rem', lineHeight: 1.6, maxWidth: '800px', textAlign: 'center' }}>
                         <PortableText value={data.introContent} />
                     </div>
                 )}
@@ -96,32 +96,43 @@ export default async function AboutPage() {
 
                 {/* 3. PROGRAM (SZCZEGÓŁOWY) */}
                 {data?.programTitle && (
-                    <div className="section-paper reveal-up" style={{ marginBottom: '60px', background: '#111', color: 'white', borderColor: 'var(--color-primary)' }}>
-                        <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '3rem', textAlign: 'center', marginBottom: '50px', color: 'var(--color-primary)' }}>
+                    <div className="section-paper reveal-up" style={{ marginBottom: '80px' }}>
+                        <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '3rem', textAlign: 'center', marginBottom: '60px', color: 'var(--color-black)' }}>
                             {data.programTitle}
                         </h2>
                         
-                        <div style={{ display: 'grid', gap: '80px' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '40px' }}>
                             {data.programCategories?.map((category: any, index: number) => (
-                                <div key={index}>
+                                <div key={index} style={{ 
+                                    background: 'var(--color-white)',
+                                    border: '3px solid var(--color-black)',
+                                    padding: '30px',
+                                    boxShadow: '8px 8px 0px var(--color-black)',
+                                    display: 'flex',
+                                    flexDirection: 'column'
+                                }}>
                                     <h3 style={{ 
                                         fontFamily: 'var(--font-display)', 
-                                        fontSize: '2.5rem', 
-                                        marginBottom: '40px', 
-                                        borderBottom: '2px solid var(--color-primary)',
-                                        paddingBottom: '15px',
-                                        display: 'inline-block',
-                                        color: 'var(--color-primary)'
+                                        fontSize: '2rem', 
+                                        marginBottom: '25px', 
+                                        borderBottom: '3px solid var(--color-primary)',
+                                        paddingBottom: '10px',
+                                        color: 'var(--color-black)',
+                                        textTransform: 'uppercase'
                                     }}>
                                         {category.categoryTitle}
                                     </h3>
                                     
                                     <ul style={{ listStyle: 'none', padding: 0 }}>
                                         {category.items?.map((point: any, pIndex: number) => (
-                                            <li key={pIndex} style={{ marginBottom: '40px', paddingLeft: '30px', borderLeft: '4px solid var(--color-primary)' }}>
-                                                <strong style={{ display: 'block', fontSize: '1.5rem', marginBottom: '10px', fontFamily: 'var(--font-display)' }}>{point.title}</strong>
+                                            <li key={pIndex} style={{ marginBottom: '25px' }}>
+                                                <strong style={{ display: 'block', fontSize: '1.2rem', marginBottom: '5px', fontFamily: 'var(--font-display)', color: 'var(--color-primary)' }}>
+                                                    {point.title}
+                                                </strong>
                                                 {point.description && (
-                                                    <span style={{ fontSize: '1.1rem', color: '#ccc', lineHeight: 1.6, display: 'block' }}>{point.description}</span>
+                                                    <span style={{ fontSize: '0.95rem', color: '#444', lineHeight: 1.5, display: 'block' }}>
+                                                        {point.description}
+                                                    </span>
                                                 )}
                                             </li>
                                         ))}
